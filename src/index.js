@@ -1,33 +1,34 @@
+// Wait for the DOM to be fully loaded before attaching event listeners
 document.addEventListener('DOMContentLoaded', () => {
-  // Get reference to the form element
+  // Get reference to the form
   const form = document.getElementById('create-task-form');
   
-  // Get reference to the task input field
+  // Get reference to the input field
   const taskInput = document.getElementById('new-task-description');
   
   // Get reference to the tasks list
   const tasksList = document.getElementById('tasks');
   
-  // Add event listener for form submission
+  // Handle form submission
   form.addEventListener('submit', function(event) {
-    // Prevent the default form submission (which would refresh the page)
+    // Always prevent the default form submission
     event.preventDefault();
     
-    // Get the task description from the input field
-    const taskDescription = taskInput.value;
+    // Get the task description, trimming any whitespace
+    const taskDescription = taskInput.value.trim();
     
-    // Only create a task if the description is not empty
-    if (taskDescription) {
+    // Only create a new task if there's actual content
+    if (taskDescription !== '') {
       // Create a new list item
       const taskItem = document.createElement('li');
       
-      // Set the task text
+      // Set the text content to the task description
       taskItem.textContent = taskDescription;
       
-      // Add the new task item to the tasks list
+      // Add the task to the list
       tasksList.appendChild(taskItem);
       
-      // Clear the input field for the next task
+      // Clear the input field
       taskInput.value = '';
     }
   });
